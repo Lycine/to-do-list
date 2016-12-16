@@ -1,3 +1,17 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: hongyu
+  Date: 16/12/16
+  Time: 下午3:17
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="/struts-tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -8,7 +22,7 @@
     <meta name="HongYu" contect="HongYu, hy19950714@outlook.com"/>
     <link rel="bookmark" type="image/x-icon" href="favicon.ico"/>
     <link rel="shortcut icon" href="favicon.ico">
-    <title>to-do list | setting</title>
+    <title>to-do list | login</title>
 
     <!-- Bootstrap -->
     <link href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -30,17 +44,12 @@
         <div>
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-list-alt"></span> to-do list | setting</a>
+                    <a href="#"><span class="glyphicon glyphicon-list-alt"></span> to-do list | login</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
                 <li>
-                    <a href="#" onclick="myFunction()"><span class="glyphicon glyphicon-log-out"></span> logout</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
-                <li>
-                    <a href="index.html.bak"><span class="glyphicon glyphicon-home"></span> home</a>
+                    <a href="regist.html"><span class="glyphicon glyphicon-pencil"></span> regist</a>
                 </li>
             </ul>
         </div>
@@ -51,12 +60,7 @@
         <div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="index.html.bak"><span class="glyphicon glyphicon-home"></span> home</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" onclick="myFunction()"><span class="glyphicon glyphicon-log-out"></span> logout</a>
+                    <a href="regist.html"><span class="glyphicon glyphicon-pencil"></span> regist</a>
                 </li>
             </ul>
         </div>
@@ -64,40 +68,20 @@
 </nav>
 <div class="container-fluid">
     <div class="col-md-6 col-md-offset-3">
-        <form role="form">
+        <form role="form" action="<%=path%>/user/action/User_login.action" method="post">
             <div class="form-group">
-                <label for="exampleInputEmail1">new Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <label for="email">Email address</label>
+                <%--<input name="user.email" id="email" class="form-control">--%>
+                <s:textfield name="email" id="email" cssClass="form-control"/>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">new Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="password">Password</label>
+                <%--<input name="user.password" id="password" class="form-control">--%>
+                <s:textfield name="password" id="password" cssClass="form-control"/>
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Enter the new password again</label>
-                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Enter the password again">
-            </div>
-            <div class="form-group">
-                <label for="nickname">Verification code</label>
-                <input type="text" class="form-control" id="nickname" placeholder="nickname">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Verification code</label>
-                <input type="text" class="form-control" id="VerificationCode" placeholder="Verification code">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Login</button>
         </form>
     </div>
 </div>
-
-<script>
-    function myFunction(){
-        var x;
-        var r=confirm("是否注销？");
-        if (r==true){
-            window.open('login.html','_self')
-        }
-    }
-</script>
 </body>
 </html>

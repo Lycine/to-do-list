@@ -4,31 +4,25 @@
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
 
     <package name="default" namespace="/" extends="struts-default">
-
-        <default-action-ref name="index" />
-
-        <global-results>
-            <result name="error">/WEB-INF/jsp/error.jsp</result>
-        </global-results>
-
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
-        </global-exception-mappings>
-
+        <default-action-ref name="index"></default-action-ref>
         <action name="index">
-            <result type="redirectAction">
-                <param name="actionName">HelloWorld</param>
-                <param name="namespace">/example</param>
-            </result>
+            <result type="dispatcher">/WEB-INF/jsp/login.jsp</result>
         </action>
     </package>
 
-    <include file="example.xml"/>
-
-    <!-- Add packages here -->
-
+    <package name="user" namespace="/user" extends="default">
+        <!--<action name="*_*" class="org.jozif.user.action.{1}Action"  method="{2}">-->
+            <!--<result name="login_success">/WEB-INF/jsp/home.jsp</result>-->
+            <!--<result name="login_failure">/WEB-INF/jsp/login.jsp</result>-->
+        <!--</action>-->
+        <action name="*_*" class="org.jozif.user.action.{1}Action"  method="{2}">
+            <result name="login_success">/WEB-INF/jsp/home.jsp</result>
+            <result name="login_failure">/WEB-INF/jsp/login.jsp</result>
+            <allowed-methods>login</allowed-methods>
+        </action>
+    </package>
 </struts>
